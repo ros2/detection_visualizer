@@ -1,7 +1,7 @@
 # Detection Visualizer
 
-This package provides a ROS 2 node that enables visualizing detections.
-It subscribes to an image and a detections topic, and outputs an image with bounding boxes from the detections message drawn on it.
+This package provides a ROS 2 node for visualizing computer vision detections.
+It subscribes to an image topic and a detections topic, and outputs an image with bounding boxes drawn on it.
 The output topic can be visualized in rviz.
 
 ![Example image with bounding boxes created using darknet and the yolov3-tiny network](doc/example_darknet_yolov3-tiny.png)
