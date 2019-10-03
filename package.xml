@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>detection_visualizer</name>
+  <version>0.1.0</version>
+  <description>Visualizes detections on an image</description>
+
+  <author email="sloretz@openrobotics.org">Shane Loretz</author>
+  <maintainer email="sloretz@openrobotics.org">Shane Loretz</maintainer>
+
+  <license>Apache License 2.0</license>
+
+  <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>message_filters</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
+
