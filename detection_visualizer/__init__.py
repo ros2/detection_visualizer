@@ -54,13 +54,13 @@ class DetectionVisualizerNode(Node):
 
         # Draw boxes on image
         for detection in detections_msg.detections:
-            max_class = -1
+            max_class = None
             max_score = 0.0
             for hypothesis in detection.results:
                 if hypothesis.score > max_score:
                     max_score = hypothesis.score
                     max_class = hypothesis.id
-            if max_class < 0:
+            if max_class is None:
                 print("Failed to find class with highest score", file=sys.stderr)
                 return
 
@@ -74,6 +74,11 @@ class DetectionVisualizerNode(Node):
             color = (0, 255, 0)
             thickness = 1
             cv2.rectangle(cv_image, min_pt, max_pt, color, thickness)
+
+            label = '{} {:.3f}'.format(max_class, max_score)
+            pos = (min_pt[0], max_pt[1])
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            cv2.putText(cv_image, label, pos, font, 0.75, color, 1, cv2.LINE_AA)
 
         self._image_pub.publish(self._bridge.cv2_to_imgmsg(cv_image, encoding="bgr8"))
 
