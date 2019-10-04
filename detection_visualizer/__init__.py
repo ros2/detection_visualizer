@@ -45,8 +45,8 @@ class DetectionVisualizerNode(Node):
         self._image_sub = message_filters.Subscriber(self, Image, '~/images')
         self._detections_sub = message_filters.Subscriber(self, Detection2DArray, '~/detections')
 
-        self._synchronizer = message_filters.TimeSynchronizer(
-            (self._image_sub, self._detections_sub), 5)
+        self._synchronizer = message_filters.ApproximateTimeSynchronizer(
+            (self._image_sub, self._detections_sub), 5, 0.01)
         self._synchronizer.registerCallback(self.on_detections)
 
     def on_detections(self, image_msg, detections_msg):
