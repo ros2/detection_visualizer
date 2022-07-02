@@ -80,7 +80,7 @@ class DetectionVisualizerNode(Node):
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(cv_image, label, pos, font, 0.75, color, 1, cv2.LINE_AA)
             
-        detection_image_msg = self._bridge.cv2_to_imgmsg(cv_image, encoding="bgr8")
+        detection_image_msg = self._bridge.cv2_to_imgmsg(cv_image, encoding=image_msg.encoding)
         detection_image_msg.header = image_msg.header
 
         self._image_pub.publish(detection_image_msg)
