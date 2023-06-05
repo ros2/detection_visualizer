@@ -56,16 +56,17 @@ class DetectionVisualizerNode(Node):
         for detection in detections_msg.detections:
             max_class = None
             max_score = 0.0
-            for hypothesis in detection.results:
+            for result in detection.results:
+                hypothesis = result.hypothesis
                 if hypothesis.score > max_score:
                     max_score = hypothesis.score
-                    max_class = hypothesis.id
+                    max_class = hypothesis.class_id
             if max_class is None:
                 print("Failed to find class with highest score", file=sys.stderr)
                 return
 
-            cx = detection.bbox.center.x
-            cy = detection.bbox.center.y
+            cx = detection.bbox.center.position.x
+            cy = detection.bbox.center.position.y
             sx = detection.bbox.size_x
             sy = detection.bbox.size_y
 
@@ -90,3 +91,4 @@ def main():
     rclpy.init()
     rclpy.spin(DetectionVisualizerNode())
     rclpy.shutdown()
+
