@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import sys
+import math
 
 import cv2
 import cv_bridge
@@ -74,7 +75,13 @@ class DetectionVisualizerNode(Node):
             max_pt = (round(cx + sx / 2.0), round(cy + sy / 2.0))
             color = (0, 255, 0)
             thickness = 1
-            cv2.rectangle(cv_image, min_pt, max_pt, color, thickness)
+            if(detection.bbox.center.theta == 0.0):
+                cv2.rectangle(cv_image, min_pt, max_pt, color, thickness)
+            else:
+                rotation = -math.degrees(detection.bbox.center.theta)
+                box = cv2.boxPoints(((cx, cy), (sx, sy), rotation))
+                box = box.astype(int)
+                cv2.drawContours(cv_image, [box], 0, color, thickness)
 
             label = '{} {:.3f}'.format(max_class, max_score)
             pos = (min_pt[0], max_pt[1])
